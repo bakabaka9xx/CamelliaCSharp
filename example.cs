@@ -1,0 +1,22 @@
+using System;
+using Camellia;
+
+class Program {
+  /// <summary>
+  ///   The main entry point for the application
+  /// </summary>
+  [STAThread]
+  public static void Main(string[] args)
+  {
+    byte[] k = {0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xfe, 0xdc, 0xba, 0x98, 0x76, 0x54, 0x32, 0x10};
+    byte[] m = {0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xfe, 0xdc, 0xba, 0x98, 0x76, 0x54, 0x32, 0x10};
+
+    Camellia128 cam = new Camellia128();
+    if(cam.SetKey(k)==false) {
+      Console.WriteLine("Error : KeyLength");
+      return;
+    }
+    byte[] c = cam.Encrypt(m);
+    Console.WriteLine(BitConverter.ToString(c));
+  }
+}
